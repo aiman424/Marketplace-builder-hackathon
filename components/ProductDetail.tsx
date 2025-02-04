@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useCart } from "@/context/cart-context";
 import Image from "next/image";
 import Header from "./Header"; // Replace with your Header component import
-import { urlFor } from "@/sanity/lib/client"; // Replace with your image helper function if applicable
+import { urlFor } from "@/sanity/lib/client"; // Ensure this is correctly set up
 
 type ProductDetailProps = {
   product: {
@@ -21,61 +21,44 @@ type ProductDetailProps = {
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
   const { addToCart } = useCart();
-  const [notification, setNotification] = useState<string | null>(null); // State for notification
-  const [isWishlisted, setIsWishlisted] = useState(false); // State for wishlist
+  const [notification, setNotification] = useState<string | null>(null);
+  const [isWishlisted, setIsWishlisted] = useState(false);
 
-  // Handle Add to Cart
   const handleAddToCart = () => {
     addToCart({
-      id: product._id,
+      _id: product._id,
       name: product.name,
       price: product.price,
       image: urlFor(product.image).url(),
       quantity: 1,
     });
 
-    // Set notification message
     setNotification(`${product.name} has been added to the cart!`);
-
-    // Clear notification after 3 seconds
-    setTimeout(() => {
-      setNotification(null);
-    }, 3000);
+    setTimeout(() => setNotification(null), 3000);
   };
 
-  // Handle Add to Wishlist
   const handleWishlistToggle = () => {
-    if (isWishlisted) {
-      setNotification(`${product.name} has been removed from the wishlist.`);
-    } else {
-      setNotification(`${product.name} has been added to the wishlist.`);
-    }
     setIsWishlisted(!isWishlisted);
-
-    // Clear notification after 3 seconds
-    setTimeout(() => {
-      setNotification(null);
-    }, 3000);
+    setNotification(
+      `${product.name} has been ${isWishlisted ? "removed from" : "added to"} the wishlist.`
+    );
+    setTimeout(() => setNotification(null), 3000);
   };
 
   return (
     <div className="w-full bg-gray-50 min-h-screen p-6 md:p-12">
-      {/* Header */}
       <Header logo={""} navLinks={[]} />
 
-      {/* Notification Banner */}
       {notification && (
         <div className="fixed top-0 left-0 right-0 bg-green-500 text-white py-3 px-4 text-center shadow-md z-50">
           {notification}
         </div>
       )}
 
-      {/* Main Product Section */}
       <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-md p-6 md:p-12 flex flex-col lg:flex-row gap-8">
-        {/* Left: Product Image */}
         <div className="flex-1 flex justify-center items-center">
           <Image
-            src={urlFor(product.image).url()}
+            src={product.image ? urlFor(product.image).url() : "/placeholder.png"}
             alt={product.name}
             width={500}
             height={500}
@@ -83,21 +66,17 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
           />
         </div>
 
-        {/* Right: Product Details */}
         <div className="flex-1 space-y-6">
           <h1 className="text-3xl font-bold">{product.name}</h1>
           <p className="text-2xl text-gray-700 font-semibold">Price: ${product.price}</p>
 
-          {/* Ratings */}
           <div className="flex items-center space-x-2">
             <span className="text-yellow-500 text-lg">⭐⭐⭐⭐⭐</span>
             <span className="text-gray-500">(5 Customer Reviews)</span>
           </div>
 
-          {/* Description */}
           <p className="text-gray-700 leading-relaxed">{product.description}</p>
 
-          {/* Add to Cart and Wishlist */}
           <div className="flex items-center gap-6">
             <button
               className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition"
@@ -115,7 +94,6 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
             </button>
           </div>
 
-          {/* Additional Information */}
           <div className="space-y-4 mt-6">
             <div className="flex justify-between border-b pb-2">
               <span className="text-gray-500">Category:</span>
