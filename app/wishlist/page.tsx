@@ -1,43 +1,16 @@
-// import React from 'react';
-// import { useWishlist } from '@/context/wishlist-context';
-
-// export default function WishlistPage() {
-//   const { wishlist, removeFromWishlist } = useWishlist();
-
-//   return (
-//     <div>
-//       <h1 className="text-2xl font-bold mb-4">Your Wishlist</h1>
-//       {wishlist.length === 0 ? (
-//         <p>Your wishlist is empty.</p>
-//       ) : (
-//         <div className="space-y-4">
-//           {wishlist.map((item) => (
-//             <div key={item._id} className="border p-4 rounded-lg">
-//               <h2 className="text-xl font-bold">{item.name}</h2>
-//               <p>Price: ${item.price}</p>
-//               <button
-//                 onClick={() => removeFromWishlist(item._id)}
-//                 className="bg-red-500 text-white p-2 rounded mt-2"
-//               >
-//                 Remove
-//               </button>
-//             </div>
-//           ))}
-//         </div>
-//       )}
-//     </div>
-//   );
-// }
-
-"use client"; // Mark this as a client component
+"use client";
 
 import { useState } from "react";
 
+// Define the type for a wishlist item
+type WishlistItem = {
+  _id: string;
+  name: string;
+};
+
 export default function WishlistPage() {
-  const [wishlist, setWishlist] = useState([
-    { _id: "1", name: "Product 1" },
-    { _id: "2", name: "Product 2" },
-  ]); // Replace this with actual wishlist data from context/state
+  // Initialize wishlist with correct type
+  const [wishlist, setWishlist] = useState<WishlistItem[]>([]);
 
   const removeFromWishlist = (id: string) => {
     setWishlist(wishlist.filter((item) => item._id !== id));

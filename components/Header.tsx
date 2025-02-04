@@ -15,20 +15,13 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ logo, navLinks }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState("en"); 
+  const [isMenuOpen, setIsMenuOpen] = useState(false); 
 
   // Toggle menu
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
-  const changeLanguage = (lang: string) => {
-    setSelectedLanguage(lang);
-    // Additional logic can be added to change the language globally
-    console.log("Language changed to:", lang);
-  };
-
+  
   return (
     <div>
       {/* Top Header */}

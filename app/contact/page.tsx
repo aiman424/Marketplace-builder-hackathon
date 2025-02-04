@@ -44,7 +44,7 @@ const Contact = () => {
             Success!
           </h1>
           <p className="text-[#244949] font-[Satoshi] text-[16px] md:text-[18px]">
-            Your message has been sent successfully. We'll get back to you soon.
+            Your message has been sent successfully. We&rsquo;ll get back to you soon.
           </p>
         </div>
       ) : (
@@ -56,8 +56,8 @@ const Contact = () => {
           <h1 className="text-[#302753] font-[Clash Display] text-[24px] md:text-[32px] mb-[20px]">
             Get in Touch
           </h1>
-          <p className='text-[#505977] font-[Satoshi] text-[18px] md:text-[18px]'>"Have questions or want to learn more about our products?We're here to help.
-            Fill out the form below and we'll get back response to you as soon as possible.",</p>
+          <p className='text-[#505977] font-[Satoshi] text-[18px] md:text-[18px]'>&rsquo;Have questions or want to learn more about our products?We&rsquo;re here to help.
+            Fill out the form below and we&rsquo;ll get back response to you as soon as possible.&rsquo;</p>
           <div className="flex flex-col gap-2">
             <label className="font-[Satoshi] text-[14px] md:text-[16px] text-[#322b5f]">
               Name

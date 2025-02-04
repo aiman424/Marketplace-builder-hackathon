@@ -1,4 +1,4 @@
-import { client, urlFor } from '@/sanity/lib/client'
+import { client } from '@/sanity/lib/client'
 import React from 'react'
 import ProductDetail from '@/components/ProductDetail';
 
@@ -32,7 +32,7 @@ const page = async ({params:{id}}:{params:{id:string}}) => {
     if(!products){
         return (
             <div>
-                <h1>"Product not found"</h1>
+                <h1>&rsquo;Product not found&rsquo;</h1>
             </div>
         )
     }
